@@ -469,11 +469,6 @@ static void enter_wait_mode(game_display& disp, const config& game_config,
 
 		if (res == mp::ui::PLAY) {
 			ui.start_game();
-			// FIXME commented a pointeless if since the else does exactly the same thing
-			//if (preferences::skip_mp_replay()){
-				//FIXME implement true skip replay
-				//state = ui.request_snapshot();
-			//}
 		} else {
 			DBG_MP << "skipped wait mode, result = " << res << std::endl;
 		}
@@ -869,7 +864,7 @@ void start_local_game_commandline(game_display& disp, const config& game_config,
 		for (int pos = state.get_starting_pos().child_count("side"); pos < map_positions; ++pos) {
 			config& side = state.get_starting_pos().add_child("side");
 			side["side"] = pos + 1;
-			side["team_name"] = pos + 1;
+			side["team_id"] = pos + 1;
 			side["canrecruit"] = true;
 			side["controller"] = "human";
 		}
